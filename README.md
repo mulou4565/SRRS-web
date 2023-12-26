@@ -45,3 +45,28 @@ npm run lint
 - stores 数据
 - styles 全局样式
 - utils 工具函数
+
+### 别名联想提示
+在编写代码的过程中，一旦输入`@/`，VSCode会立刻联想出src下的所有子目录和文件，统一文件路径访问
+
+在`jsconfig.json`中，配置@/`提示`：compilerOptions
+
+在vite.config.js中，别名`@`路径的配置--->进行实际的路径转换
+```
+alias: {
+    '@': fileURLToPath(new URL('./src', import.meta.url))
+}
+```
+
+## 组件
+### 通用型ElementPlus
+#### 主题风格
+- 主题色
+- 辅助色
+  
+如何定制：scss变量替换，准备定制样式.scss文件对elementplus样式进行覆盖。
+> 存放位置：styles/element/index.scss
+
+
+
+### 业务定制化组件
