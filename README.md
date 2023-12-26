@@ -67,6 +67,11 @@ alias: {
 如何定制：scss变量替换，准备定制样式.scss文件对elementplus样式进行覆盖。
 > 存放位置：styles/element/index.scss
 
-
-
 ### 业务定制化组件
+
+## 统一接口配置axios
+基础配置
+- 接口基地址
+- 接口超时时间
+- 请求拦截器
+- 响应拦截器
