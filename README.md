@@ -34,7 +34,7 @@ npm run build
 npm run lint
 ```
 
-## 项目结构
+# 项目结构
 
 - api API接口
 - assets 静态资源
@@ -46,7 +46,7 @@ npm run lint
 - styles 全局样式
 - utils 工具函数
 
-### 别名联想提示
+## 别名联想提示
 在编写代码的过程中，一旦输入`@/`，VSCode会立刻联想出src下的所有子目录和文件，统一文件路径访问
 
 在`jsconfig.json`中，配置@/`提示`：compilerOptions
@@ -58,25 +58,25 @@ alias: {
 }
 ```
 
-## 组件
-### 通用型ElementPlus
-#### 主题风格
+# 组件
+## 通用型ElementPlus
+### 主题风格
 - 主题色
 - 辅助色
   
 如何定制：scss变量替换，准备定制样式.scss文件对elementplus样式进行覆盖。
 > 存放位置：styles/element/index.scss
 
-### 业务定制化组件
+## 业务定制化组件
 
-## 统一接口配置axios
+# 统一接口配置axios
 基础配置
 - 接口基地址
 - 接口超时时间
 - 请求拦截器
 - 响应拦截器
 
-### 项目路由设计
+## 项目路由设计
 一级路由：页面整体切换
 - 首页 path: #/
 - 登录页 path: #/login
@@ -85,9 +85,18 @@ alias: {
 - 分类页
 - 默认Home页
   
-## 静态资源
+# 静态资源
 - 图片资源
 - 样式资源：项目初始化进行样式重置，开源的normalize.css
 
-### 自动导入scss文件
+## 自动导入scss文件
 将一些组件共享的色值以scss变量的方式统一放到一个.scss文件下，自动导入后直接使用内部变量。
+
+# 静态模板搭建
+- Nav区域
+- Header区域
+- 二级路由出口区域
+- Footer区域
+  
+# Pinia
+通过Pinia集中管理数据，再把数据分发给组件使用。**单次请求多组件中使用**。
