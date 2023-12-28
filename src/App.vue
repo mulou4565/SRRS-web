@@ -5,10 +5,10 @@
 <template>
   <!-- 一级路由出口组件 -->
   <RouterView />
-  <el-button type="primary">primary</el-button>
+  <!-- <el-button type="primary">primary</el-button>
   <div class="test">
     test scss
-  </div>
+  </div> -->
 </template>
 
 <style scoped lang="scss">

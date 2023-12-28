@@ -7,16 +7,12 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-
-//测试接口函数
-// import { getCategory } from '@/api/layout'
-// getCategory().then(res => {
-//     console.log(res);
-// })
+import { lazyPlugin } from '@/directives/lazyPlugin'
 
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+app.use(lazyPlugin)
 
 app.mount('#app')

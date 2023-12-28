@@ -10,3 +10,5 @@ export const useCounterStore = defineStore('counter', () => {
 
   return { count, doubleCount, increment }
 })
+
+// 使用pinia管理数据，做缓存
