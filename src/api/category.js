@@ -15,7 +15,7 @@ export const getTopCategoryAPI = (id) => {
 }
 
 /**
- * @description: 获取二级分类列表数据
+ * @description: 获取面包屑导航数据
  * @param {*} id 分类id 
  * @return {*}
  */
@@ -29,7 +29,7 @@ export const getSubCategoryAPI = (id) => {
 }
 
 /**
- * @description: 获取导航数据  列表筛选
+ * @description: 获取二级分类列表数据  列表筛选
  * @data { 
      categoryId: 1005000 ,
      page: 1,

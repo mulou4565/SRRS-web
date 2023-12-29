@@ -17,7 +17,7 @@ getHotList()
     <template #main>
       <ul class="goods-list">
         <li v-for="item in hotList" :key="item.id">
-          <RouterLink to="/">
+          <RouterLink :to="`/detail/${item.id}`">
             <!-- 懒加载 -->
             <img v-img-lazy="item.picture" alt="">
             <p class="name">{{ item.title }}</p>
