@@ -4,11 +4,18 @@
       <dt>{{ item.name }}</dt>
       <dd>
         <template v-for="val in item.values" :key="val.name">
-          <img :class="{ selected: val.selected, disabled: val.disabled }" @click="clickSpecs(item, val)"
-            v-if="val.picture" :src="val.picture" />
-          <span :class="{ selected: val.selected, disabled: val.disabled }" @click="clickSpecs(item, val)" v-else>{{
-              val.name
-          }}</span>
+          <!-- 图片类型规格 -->
+          <img :class="{ selected: val.selected, disabled: val.disabled }" 
+            @click="clickSpecs(item, val)"
+            v-if="val.picture" 
+            :src="val.picture" 
+            :title="val.name" />
+          <!-- 文字类型规格 -->
+          <span :class="{ selected: val.selected, disabled: val.disabled }" 
+            @click="clickSpecs(item, val)" 
+            v-else>
+            {{ val.name }}
+          </span>
         </template>
       </dd>
     </dl>
@@ -18,12 +25,14 @@
 <script>
 import { watchEffect } from 'vue'
 import getPowerSet from './power-set'
-const spliter = '★'
+
+const split = '★'
 
 // 根据skus数据得到路径字典对象
 const getPathMap = (skus) => {
   const pathMap = {}
   if (skus && skus.length > 0) {
+    // 根据有效的Sku集合使用powerSet算法得到所有子集 [1,2] => [[1], [2], [1,2]]
     skus.forEach(sku => {
       // 1. 过滤出有库存有效的sku
       if (sku.inventory) {
@@ -31,9 +40,9 @@ const getPathMap = (skus) => {
         const specs = sku.specs.map(spec => spec.valueName)
         // 3. 得到sku属性值数组的子集
         const powerSet = getPowerSet(specs)
-        // 4. 设置给路径字典对象
+        // 4. 根据子集生成路径字典对象
         powerSet.forEach(set => {
-          const key = set.join(spliter)
+          const key = set.join(split)
           // 如果没有就先初始化一个空数组
           if (!pathMap[key]) {
             pathMap[key] = []
@@ -47,8 +56,10 @@ const getPathMap = (skus) => {
 }
 
 // 初始化禁用状态
+// 思路：判断规格的name属性是否能在有效路径字典pathMap中找到，如果找不到就禁用
 function initDisabledStatus (specs, pathMap) {
   if (specs && specs.length > 0) {
+    // 约定：每一个按钮的状态由自身的disabled进行控制
     specs.forEach(spec => {
       spec.values.forEach(val => {
         // 设置禁用状态
@@ -83,7 +94,8 @@ const updateDisabledStatus = (specs, pathMap) => {
       if (!val.selected) {
         selectedArr[i] = val.name
         // 去掉undefined之后组合成key
-        const key = selectedArr.filter(value => value).join(spliter)
+        const key = selectedArr.filter(value => value).join(split)
+        // 路径字典中查找是否有数据 有-可以点击 没有-禁用
         val.disabled = !pathMap[key]
       }
     })
@@ -124,11 +136,11 @@ export default {
       // 把选择的sku信息传出去给父组件
       // 触发change事件将sku数据传递出去
       const selectedArr = getSelectedArr(props.goods.specs).filter(value => value)
-      // 如果选中得规格数量和传入得规格总数相等则传出完整信息(都选择了)
+      // 如果选中的规格数量和传入的规格总数相等则传出完整信息(都选择了)
       // 否则传出空对象
       if (selectedArr.length === props.goods.specs.length) {
         // 从路径字典中得到skuId
-        const skuId = pathMap[selectedArr.join(spliter)][0]
+        const skuId = pathMap[selectedArr.join(split)][0]
         const sku = props.goods.skus.find(sku => sku.id === skuId)
         // 传递数据给父组件
         emit('change', {

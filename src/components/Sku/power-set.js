@@ -1,4 +1,4 @@
-
+// 幂集算法 ---- 生成路径字典
 export default function bwPowerSet (originalSet) {
   const subSets = []
 
